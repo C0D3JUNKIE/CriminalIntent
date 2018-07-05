@@ -12,7 +12,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CrimeListFragment extends Fragment {
 
@@ -59,12 +63,19 @@ public class CrimeListFragment extends Fragment {
       public void bind(Crime crime){
           this.crime = crime;
           titleTextView.setText(crime.getTitle());
-          dateTextView.setText(crime.getDate().toString());
+//          dateTextView.setText(crime.getDate().toString());
+          dateTextView.setText(getFormattedDate(crime.getDate()));
       }
 
         @Override
         public void onClick(View view) {
             Toast.makeText(getActivity(), crime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
+        }
+
+        private String getFormattedDate(Date date){
+
+            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.getDefault());
+            return formatter.format(date);
         }
     }
 
