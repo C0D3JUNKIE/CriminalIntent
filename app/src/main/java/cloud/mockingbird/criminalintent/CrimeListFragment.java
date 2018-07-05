@@ -9,29 +9,91 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class CrimeListFragment extends Fragment {
 
     private RecyclerView crimeRecyclerView;
+    private CrimeAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_crime, container, false);
-        crimeRecyclerView = (RecyclerView) view.findViewById(R.id.rv_crime_item);
+        View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
+        crimeRecyclerView = view.findViewById(R.id.rv_crime_item);
         crimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        updateUI();
         return view;
 
     }
 
-    private class CrimeHolder extends RecyclerView.ViewHolder{
+    private void updateUI(){
 
-        public CrimeHolder(LayoutInflater inflater, ViewGroup parent){
+        CrimeLab crimeLab = CrimeLab.get(getActivity());
+        List<Crime> crimes = crimeLab.getCrimes();
+
+        adapter = new CrimeAdapter(crimes);
+        crimeRecyclerView.setAdapter(adapter);
+
+    }
+
+    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+      private Crime crime;
+      private TextView titleTextView;
+      private TextView dateTextView;
+
+      public CrimeHolder(@NonNull LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_crime, parent, false));
+            itemView.setOnClickListener(this);
+
+            titleTextView = itemView.findViewById(R.id.tv_crime_title);
+            dateTextView = itemView.findViewById(R.id.tv_crime_date);
+
+      }
+
+      public void bind(Crime crime){
+          this.crime = crime;
+          titleTextView.setText(crime.getTitle());
+          dateTextView.setText(crime.getDate().toString());
+      }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getActivity(), crime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
         }
     }
 
+    private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder>{
 
+        private List<Crime> crimes;
+
+        public CrimeAdapter(List<Crime> crimes){
+            this.crimes = crimes;
+        }
+
+        @NonNull
+        @Override
+        public CrimeHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            return new CrimeHolder(layoutInflater, viewGroup);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull CrimeHolder crimeHolder, int i){
+          Crime crime = crimes.get(i);
+          crimeHolder.bind(crime);
+        }
+
+        @Override
+        public int getItemCount() {
+            return crimes.size();
+        }
+
+    }
 
 }

@@ -27,10 +27,10 @@ public class CrimeFragment extends Fragment{
         crime = new Crime();
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//    }
 
     @Nullable
     @Override
@@ -38,7 +38,7 @@ public class CrimeFragment extends Fragment{
 
         View view = inflater.inflate(R.layout.fragment_crime, container, false);
 
-        titleField = (EditText) view.findViewById(R.id.crime_title);
+        titleField = view.findViewById(R.id.crime_title);
         titleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -56,11 +56,11 @@ public class CrimeFragment extends Fragment{
             }
         });
 
-        dateButton = (Button) view.findViewById(R.id.crime_date);
+        dateButton = view.findViewById(R.id.crime_date);
         dateButton.setText(crime.getDate().toString());
         dateButton.setEnabled(false);
 
-        solvedCheckBox = (CheckBox) view.findViewById(R.id.crime_solved);
+        solvedCheckBox = view.findViewById(R.id.crime_solved);
         solvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
