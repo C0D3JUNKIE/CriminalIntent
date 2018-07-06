@@ -10,4 +10,6 @@
     <string name="jump_first">To First</string>
     <string name="jump_last">To Last</string>
 
+    <string name="date_picker_title">Date of crime:</string>
+
 </resources>
