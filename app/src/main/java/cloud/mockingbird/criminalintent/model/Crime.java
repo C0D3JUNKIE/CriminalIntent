@@ -1,4 +1,4 @@
-package cloud.mockingbird.criminalintent;
+package cloud.mockingbird.criminalintent.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

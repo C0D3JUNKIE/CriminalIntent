@@ -1,5 +1,6 @@
 package cloud.mockingbird.criminalintent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,13 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import cloud.mockingbird.criminalintent.model.Crime;
 
 public class CrimeListFragment extends Fragment {
 
@@ -35,13 +36,23 @@ public class CrimeListFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI(){
 
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 
-        adapter = new CrimeAdapter(crimes);
-        crimeRecyclerView.setAdapter(adapter);
+        if(adapter == null){
+            adapter = new CrimeAdapter(crimes);
+            crimeRecyclerView.setAdapter(adapter);
+        }else{
+          adapter.notifyDataSetChanged();
+        }
 
     }
 
@@ -52,7 +63,8 @@ public class CrimeListFragment extends Fragment {
       private TextView dateTextView;
 
       public CrimeHolder(@NonNull LayoutInflater inflater, ViewGroup parent){
-            super(inflater.inflate(R.layout.list_item_crime, parent, false));
+
+          super(inflater.inflate(R.layout.list_item_crime, parent, false));
             itemView.setOnClickListener(this);
 
             titleTextView = itemView.findViewById(R.id.tv_crime_title);
@@ -63,13 +75,13 @@ public class CrimeListFragment extends Fragment {
       public void bind(Crime crime){
           this.crime = crime;
           titleTextView.setText(crime.getTitle());
-//          dateTextView.setText(crime.getDate().toString());
           dateTextView.setText(getFormattedDate(crime.getDate()));
       }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), crime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
+          Intent intent = CrimeActivity.newIntent(getActivity(), crime.getId());
+          startActivity(intent);
         }
 
         private String getFormattedDate(Date date){
