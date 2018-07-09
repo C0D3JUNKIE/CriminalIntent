@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import cloud.mockingbird.criminalintent.model.Crime;
@@ -22,7 +23,7 @@ public class CrimePagerActivity extends AppCompatActivity {
     private static final String EXTRA_CRIME_ID = "cloud.mockingbird.criminalintent.crime_id";
 
     private ViewPager viewPager;
-    private List<Crime> crimes;
+    private Map<UUID, Crime> crimes;
     private Button jumpFirstButton;
     private Button jumpLastButton;
 

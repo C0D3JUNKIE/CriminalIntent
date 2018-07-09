@@ -30,12 +30,12 @@ public class CrimeLab {
 
       crimes = new LinkedHashMap<>();
 
-      for(int i =  0; i < 100; i++){
-          Crime crime = new Crime();
-          crime.setTitle("Crime #" + i);
-          crime.setSolved(i % 2 == 0);
-          crimes.put(crime.getId(), crime);
-      }
+//      for(int i =  0; i < 100; i++){
+//          Crime crime = new Crime();
+//          crime.setTitle("Crime #" + i);
+//          crime.setSolved(i % 2 == 0);
+//          crimes.put(crime.getId(), crime);
+//      }
 
     }
 
@@ -43,8 +43,12 @@ public class CrimeLab {
         return crimes.get(id);
     }
 
-    public List<Crime> getCrimes(){
-        return new ArrayList<>(crimes.values());
+    public Map<UUID, Crime> getCrimes(){
+        return crimes;
+    }
+
+    public void addCrime(Crime c){
+        crimes.put( c.getId(), c);
     }
 
 }
