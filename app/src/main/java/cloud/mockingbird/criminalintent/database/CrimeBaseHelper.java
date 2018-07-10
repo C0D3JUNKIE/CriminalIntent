@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import cloud.mockingbird.criminalintent.database.CrimeDbSchema.CrimeTable;
+import static cloud.mockingbird.criminalintent.database.CrimeDbSchema.CrimeTable.*;
 
 public class CrimeBaseHelper extends SQLiteOpenHelper {
 
@@ -17,12 +17,14 @@ public class CrimeBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE " + CrimeTable.NAME +
-            "(" + " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            CrimeTable.Cols.UUID + ", " +
-            CrimeTable.Cols.TITLE + ", " +
-            CrimeTable.Cols.DATE + ", " +
-            CrimeTable.Cols.SOLVED + ")");
+        sqLiteDatabase.execSQL("CREATE TABLE " + NAME +
+            "(" + " _id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            Cols.UUID + ", " +
+            Cols.TITLE + ", " +
+            Cols.DATE + ", " +
+            Cols.SOLVED + ", " +
+            Cols.SUSPECT + ")"
+        );
     }
 
     @Override

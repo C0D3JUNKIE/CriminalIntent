@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public class CrimePagerActivity extends AppCompatActivity {
     private static final String EXTRA_CRIME_ID = "cloud.mockingbird.criminalintent.crime_id";
 
     private ViewPager viewPager;
-    private Map<UUID, Crime> crimes;
+    private List<Crime> crimes;
     private Button jumpFirstButton;
     private Button jumpLastButton;
 
@@ -90,21 +91,21 @@ public class CrimePagerActivity extends AppCompatActivity {
             }
         });
 
-        jumpFirstButton = (Button) findViewById(R.id.jump_first_button);
-        jumpFirstButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewPager.setCurrentItem(0);
-            }
-        });
-
-        jumpLastButton = (Button) findViewById(R.id.jump_last_button);
-        jumpLastButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewPager.setCurrentItem(crimes.size() - 1);
-            }
-        });
+//        jumpFirstButton = (Button) findViewById(R.id.jump_first_button);
+//        jumpFirstButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                viewPager.setCurrentItem(0);
+//            }
+//        });
+//
+//        jumpLastButton = (Button) findViewById(R.id.jump_last_button);
+//        jumpLastButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                viewPager.setCurrentItem(crimes.size() - 1);
+//            }
+//        });
 
     }
 

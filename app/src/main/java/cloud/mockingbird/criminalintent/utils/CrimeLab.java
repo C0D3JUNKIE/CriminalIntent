@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -21,6 +23,7 @@ import cloud.mockingbird.criminalintent.models.Crime;
 
 public class CrimeLab {
 
+//    private List<Crime> crimes;
     private Context context;
     private SQLiteDatabase database;
 
@@ -33,6 +36,7 @@ public class CrimeLab {
         values.put(CrimeTable.Cols.TITLE, crime.getTitle());
         values.put(CrimeTable.Cols.DATE, crime.getDate().getTime());
         values.put(CrimeTable.Cols.SOLVED, crime.isSolved() ? 1:0);
+        values.put(CrimeTable.Cols.SUSPECT, crime.getSuspect());
 
         return values;
     }
@@ -68,14 +72,14 @@ public class CrimeLab {
 
     }
 
-    public Map<UUID, Crime> getCrimes(){
-        Map<UUID, Crime> crimes = new LinkedHashMap<>();
+    public List<Crime> getCrimes(){
+        List<Crime> crimes = new ArrayList<>();
         CrimeCursorWrapper cursor = queryCrimes(null, null);
 
         try{
             cursor.moveToFirst();
             while(!cursor.isAfterLast()){
-                crimes.put(cursor.getCrime().getId(), cursor.getCrime());
+                crimes.add(cursor.getCrime());
                 cursor.moveToNext();
             }
         }finally{
@@ -106,7 +110,9 @@ public class CrimeLab {
                 null,
                 null,
                 null);
+
         return new CrimeCursorWrapper(cursor);
+
     }
 
 }
