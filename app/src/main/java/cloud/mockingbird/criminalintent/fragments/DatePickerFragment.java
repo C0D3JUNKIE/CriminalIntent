@@ -1,4 +1,4 @@
-package cloud.mockingbird.criminalintent;
+package cloud.mockingbird.criminalintent.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,6 +16,8 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import cloud.mockingbird.criminalintent.R;
 
 public class DatePickerFragment extends DialogFragment {
 

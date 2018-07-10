@@ -1,4 +1,4 @@
-package cloud.mockingbird.criminalintent;
+package cloud.mockingbird.criminalintent.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import cloud.mockingbird.criminalintent.model.Crime;
+import cloud.mockingbird.criminalintent.fragments.CrimeFragment;
+import cloud.mockingbird.criminalintent.utils.CrimeLab;
+import cloud.mockingbird.criminalintent.R;
+import cloud.mockingbird.criminalintent.models.Crime;
 
 public class CrimePagerActivity extends AppCompatActivity {
 

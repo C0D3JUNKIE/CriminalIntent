@@ -1,4 +1,4 @@
-package cloud.mockingbird.criminalintent;
+package cloud.mockingbird.criminalintent.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +20,9 @@ import android.widget.EditText;
 import java.util.Date;
 import java.util.UUID;
 
-import cloud.mockingbird.criminalintent.model.Crime;
+import cloud.mockingbird.criminalintent.utils.CrimeLab;
+import cloud.mockingbird.criminalintent.R;
+import cloud.mockingbird.criminalintent.models.Crime;
 
 public class CrimeFragment extends Fragment{
 
@@ -49,6 +51,12 @@ public class CrimeFragment extends Fragment{
       UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
       crime = CrimeLab.get(getActivity()).getCrime(crimeId);
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.get(getActivity()).updateCrime(crime);
     }
 
     @Override

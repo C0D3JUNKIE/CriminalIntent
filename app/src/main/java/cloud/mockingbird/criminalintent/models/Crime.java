@@ -1,6 +1,5 @@
-package cloud.mockingbird.criminalintent.model;
+package cloud.mockingbird.criminalintent.models;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,8 +11,12 @@ public class Crime {
     private boolean solved;
 
     public Crime(){
+        this(UUID.randomUUID());
+    }
 
-      this.id = UUID.randomUUID();
+    public Crime(UUID id){
+
+      this.id = id;
       this.date = new Date();
 
     }

@@ -1,4 +1,4 @@
-package cloud.mockingbird.criminalintent;
+package cloud.mockingbird.criminalintent.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,12 +19,14 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-import cloud.mockingbird.criminalintent.model.Crime;
+import cloud.mockingbird.criminalintent.utils.CrimeLab;
+import cloud.mockingbird.criminalintent.R;
+import cloud.mockingbird.criminalintent.activities.CrimePagerActivity;
+import cloud.mockingbird.criminalintent.models.Crime;
 
 public class CrimeListFragment extends Fragment {
 
